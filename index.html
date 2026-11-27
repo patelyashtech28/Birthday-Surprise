@@ -689,9 +689,110 @@ html, body {
         padding-top: 110px;
     }
 }
+/* 3-Tap Wobbling Gift Box Intro */
+#gift-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    background: linear-gradient(180deg, var(--blush-light) 0%, var(--champagne) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#gift-gate.opened {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+}
+
+.gift-box-btn {
+    font-size: 6.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    margin: 20px 0;
+    display: inline-block;
+    filter: drop-shadow(0 15px 25px rgba(183, 110, 121, 0.25));
+    transition: transform 0.2s ease;
+}
+
+.gift-box-btn:active {
+    transform: scale(0.92);
+}
+
+/* Wobble Animations */
+@keyframes wobbleLight {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-10deg) scale(1.05); }
+    50% { transform: rotate(10deg) scale(1.05); }
+    75% { transform: rotate(-6deg) scale(1.03); }
+}
+
+@keyframes wobbleHard {
+    0%, 100% { transform: rotate(0deg) scale(1.08); }
+    20% { transform: rotate(-16deg) scale(1.14); }
+    40% { transform: rotate(16deg) scale(1.14); }
+    60% { transform: rotate(-12deg) scale(1.12); }
+    80% { transform: rotate(12deg) scale(1.12); }
+}
+
+.wobble-1 {
+    animation: wobbleLight 0.55s ease-in-out;
+}
+
+.wobble-2 {
+    animation: wobbleHard 0.6s ease-in-out;
+}
+
+.tap-dots {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.tap-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blush-mid);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.tap-dot.active {
+    background: var(--rosegold);
+    transform: scale(1.25);
+}
     </style>
 </head>
 <body>
+    <!-- 3-Tap Gift Box Intro Overlay -->
+<div id="gift-gate">
+    <span class="badge">Special Delivery For Achu 📦</span>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text-main); max-width: 480px;">
+        A Mystery Box Arrived!
+    </h2>
+    <p id="gift-hint" style="color: var(--text-muted); font-size: 0.98rem; max-width: 380px; margin-top: 8px;">
+        Tap the gift box <strong>3 times</strong> to unwrap your birthday surprise...
+    </p>
+
+    <button type="button" id="gift-box" class="gift-box-btn" onclick="tapGiftBox()" aria-label="Tap gift box">
+        🎁
+    </button>
+
+    <div class="tap-dots">
+        <span class="tap-dot" id="dot-1"></span>
+        <span class="tap-dot" id="dot-2"></span>
+        <span class="tap-dot" id="dot-3"></span>
+    </div>
+</div>
 
     <!-- Floating Background Hearts Container -->
     <div id="hearts-container"></div>
@@ -948,12 +1049,52 @@ html, body {
         <p>Created with infinite warmth, care, and good vibes.</p>
         <p style="font-size: 0.8rem; color: #aaa; margin-top: 20px;">&copy; 2026 Crafted specially for the best friend in the universe.</p>
     </footer>
-
+    
     <!-- Toast Notification Box -->
     <div id="toast">Action completed successfully!</div>
 
     <!-- JavaScript Logic -->
     <script>
+        let giftTaps = 0;
+
+function tapGiftBox() {
+    const box = document.getElementById('gift-box');
+    const hint = document.getElementById('gift-hint');
+    const gate = document.getElementById('gift-gate');
+
+    giftTaps++;
+
+    // Reset animation class so it retriggers cleanly on each tap
+    box.classList.remove('wobble-1', 'wobble-2');
+    void box.offsetWidth;
+
+    if (giftTaps === 1) {
+        document.getElementById('dot-1').classList.add('active');
+        box.classList.add('wobble-1');
+        hint.innerHTML = "Ooh, something's rattling inside! Is it <strong>Idli</strong> or <strong>Limboo</strong>? Tap again! 👀";
+    } else if (giftTaps === 2) {
+        document.getElementById('dot-2').classList.add('active');
+        box.classList.add('wobble-2');
+        hint.innerHTML = "Almost open! <strong>Snowbell</strong> energy detected... <strong>1 more tap!</strong> ✨";
+    } else if (giftTaps >= 3) {
+        document.getElementById('dot-3').classList.add('active');
+        box.innerText = "🎊";
+        box.style.transform = "scale(1.35)";
+        hint.innerHTML = "<strong>Happy Birthday, Achu!! 🎉</strong>";
+
+        // Burst confetti & reveal the main site
+        if (typeof triggerConfetti === 'function') {
+            triggerConfetti();
+        }
+
+        setTimeout(() => {
+            gate.classList.add('opened');
+            setTimeout(() => {
+                gate.remove();
+            }, 600);
+        }, 450);
+    }
+}
         // Lightbox Gallery Logic
         function openLightbox(src, title, desc) {
             document.getElementById('lightbox-img').src = src;
@@ -993,36 +1134,82 @@ html, body {
         }
 
         // Confetti burst effect
-        function triggerConfetti() {
-            showToast("✨ Woohoo! Confetti shower for Achu! 🎉");
-            for (let i = 0; i < 40; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.style.position = 'fixed';
-                    confetti.style.zIndex = '9999';
-                    confetti.style.borderRadius = '50%';
-                    const size = Math.floor(Math.random() * 8) + 6;
-                    const colors = ['#b76e79', '#cd8389', '#f4c2c2', '#eacace', '#ffffff', '#ffd1dc'];
-                    confetti.style.width = size + 'px';
-                    confetti.style.height = size + 'px';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.left = Math.random() * window.innerWidth + 'px';
-                    confetti.style.top = '-10px';
-                    confetti.style.transition = `all ${(Math.random() * 2 + 1).toFixed(2)}s ease-out`;
-                    
-                    document.body.appendChild(confetti);
-                    
-                    setTimeout(() => {
-                        confetti.style.transform = `translate(${Math.random() * 200 - 100}px, ${window.innerHeight + 50}px) rotate(${Math.random() * 360}deg)`;
-                        confetti.style.opacity = '0';
-                    }, 50);
+        function triggerConfetti(options = {}) {
+    const showModal = options.showModal !== false;
 
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, 3000);
-                }, i * 35);
+    if (showModal) {
+        const modal = document.getElementById('celebration-modal');
+        if (modal) {
+            modal.classList.add('active');
+            if (typeof renderCelebrationWish === 'function') {
+                renderCelebrationWish();
             }
         }
+    }
+
+    const emojis = ['🎉', '🌸', '✨', '💖', '🎂', '🍋', '🍲'];
+    const colors = ['#b76e79', '#cd8389', '#f4c2c2', '#eacace', '#ffd1dc', '#f7b267'];
+    const maxWidth = document.documentElement.clientWidth || window.innerWidth;
+
+    const totalPieces = 120; // Increase or decrease for denser/lighter shower
+    const waves = 4;
+    const perWave = Math.ceil(totalPieces / waves);
+
+    for (let w = 0; w < waves; w++) {
+        setTimeout(() => {
+            for (let i = 0; i < perWave; i++) {
+                setTimeout(() => {
+                    const piece = document.createElement('div');
+                    const roll = Math.random();
+                    const fallDuration = (Math.random() * 1.6 + 1.4).toFixed(2);
+                    const startX = Math.min(maxWidth - 28, Math.max(4, Math.random() * (maxWidth - 28)));
+
+                    piece.style.position = 'fixed';
+                    piece.style.zIndex = '9999';
+                    piece.style.pointerEvents = 'none';
+                    piece.style.left = startX + 'px';
+                    piece.style.top = '-28px';
+                    piece.style.opacity = '0.95';
+                    piece.style.transition = `transform ${fallDuration}s cubic-bezier(0.22, 0.61, 0.36, 1), opacity ${fallDuration}s ease-in`;
+
+                    if (roll < 0.32) {
+                        // Falling birthday emoji
+                        piece.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                        piece.style.fontSize = (Math.floor(Math.random() * 12) + 16) + 'px';
+                    } else if (roll < 0.68) {
+                        // Confetti strip
+                        piece.style.width = (Math.floor(Math.random() * 6) + 6) + 'px';
+                        piece.style.height = (Math.floor(Math.random() * 10) + 10) + 'px';
+                        piece.style.borderRadius = '2px';
+                        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    } else {
+                        // Confetti dot
+                        const size = Math.floor(Math.random() * 8) + 6;
+                        piece.style.width = size + 'px';
+                        piece.style.height = size + 'px';
+                        piece.style.borderRadius = '50%';
+                        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    }
+
+                    document.body.appendChild(piece);
+
+                    requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            const driftX = (Math.random() * 140 - 70);
+                            const rotateDeg = (Math.random() * 540 - 270);
+                            piece.style.transform = `translate(${driftX}px, ${window.innerHeight + 80}px) rotate(${rotateDeg}deg)`;
+                            piece.style.opacity = '0';
+                        }, 30);
+                    });
+
+                    setTimeout(() => {
+                        piece.remove();
+                    }, (parseFloat(fallDuration) + 0.2) * 1000);
+                }, i * 18);
+            }
+        }, w * 260);
+    }
+}   
 
         // Letter Like Counter Logic
         let isLiked = false;
