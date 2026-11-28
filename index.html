@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday to My Best Friend! 🌸</title>
+    <title>Happy Birthday, Priyal 🌸</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -20,20 +20,15 @@
             --shadow: 0 10px 30px rgba(183, 110, 121, 0.12);
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
-html, body {
-    overflow-x: clip;
-}
+        html, body {
+            overflow-x: clip;
+        }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -363,8 +358,8 @@ html, body {
         /* Flip Cards Section */
         .flip-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
         }
 
         .flip-card {
@@ -408,8 +403,8 @@ html, body {
         }
 
         .flip-front img {
-            width: 120%;
-            height: 270px;
+            width: 100%;
+            height: 220px;
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 20px;
@@ -628,178 +623,155 @@ html, body {
             transform: translateY(0);
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .letter-card {
-                padding: 30px 20px;
+            header {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 12px 16px;
             }
+
+            .nav-logo {
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                padding: 7px 14px;
+                font-size: 0.8rem;
+            }
+
+            section {
+                padding: 64px 16px;
+            }
+
+            .letter-card {
+                padding: 28px 20px;
+            }
+
+            .cake-section {
+                padding: 45px 20px;
+                margin: 24px 16px;
+            }
+
+            .cake-emoji {
+                font-size: 4rem;
+            }
+
             .hero {
-                padding-top: 100px;
+                padding-top: 110px;
             }
         }
-        .flip-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-}
 
-.flip-front img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    background: var(--blush-light);
-}
+        /* 3-Tap Wobbling Gift Box Intro */
+        #gift-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            background: linear-gradient(180deg, var(--blush-light) 0%, var(--champagne) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
 
-@media (max-width: 768px) {
-    header {
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 12px 16px;
-    }
+        #gift-gate.opened {
+            opacity: 0;
+            transform: scale(1.08);
+            pointer-events: none;
+        }
 
-    .nav-logo {
-        font-size: 0.95rem;
-    }
+        .gift-box-btn {
+            font-size: 6.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            margin: 20px 0;
+            display: inline-block;
+            filter: drop-shadow(0 15px 25px rgba(183, 110, 121, 0.25));
+            transition: transform 0.2s ease;
+        }
 
-    .btn {
-        padding: 7px 14px;
-        font-size: 0.8rem;
-    }
+        .gift-box-btn:active {
+            transform: scale(0.92);
+        }
 
-    section {
-        padding: 64px 16px;
-    }
+        /* Wobble Animations */
+        @keyframes wobbleLight {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.05); }
+            50% { transform: rotate(10deg) scale(1.05); }
+            75% { transform: rotate(-6deg) scale(1.03); }
+        }
 
-    .letter-card {
-        padding: 28px 20px;
-    }
+        @keyframes wobbleHard {
+            0%, 100% { transform: rotate(0deg) scale(1.08); }
+            20% { transform: rotate(-16deg) scale(1.14); }
+            40% { transform: rotate(16deg) scale(1.14); }
+            60% { transform: rotate(-12deg) scale(1.12); }
+            80% { transform: rotate(12deg) scale(1.12); }
+        }
 
-    .cake-section {
-        padding: 45px 20px;
-        margin: 24px 16px;
-    }
+        .wobble-1 {
+            animation: wobbleLight 0.55s ease-in-out;
+        }
 
-    .cake-emoji {
-        font-size: 4rem;
-    }
+        .wobble-2 {
+            animation: wobbleHard 0.6s ease-in-out;
+        }
 
-    .hero {
-        padding-top: 110px;
-    }
-}
-/* 3-Tap Wobbling Gift Box Intro */
-#gift-gate {
-    position: fixed;
-    inset: 0;
-    z-index: 5000;
-    background: linear-gradient(180deg, var(--blush-light) 0%, var(--champagne) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 24px;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
+        .tap-dots {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 16px;
+        }
 
-#gift-gate.opened {
-    opacity: 0;
-    transform: scale(1.08);
-    pointer-events: none;
-}
+        .tap-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--blush-mid);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
 
-.gift-box-btn {
-    font-size: 6.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    margin: 20px 0;
-    display: inline-block;
-    filter: drop-shadow(0 15px 25px rgba(183, 110, 121, 0.25));
-    transition: transform 0.2s ease;
-}
-
-.gift-box-btn:active {
-    transform: scale(0.92);
-}
-
-/* Wobble Animations */
-@keyframes wobbleLight {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(-10deg) scale(1.05); }
-    50% { transform: rotate(10deg) scale(1.05); }
-    75% { transform: rotate(-6deg) scale(1.03); }
-}
-
-@keyframes wobbleHard {
-    0%, 100% { transform: rotate(0deg) scale(1.08); }
-    20% { transform: rotate(-16deg) scale(1.14); }
-    40% { transform: rotate(16deg) scale(1.14); }
-    60% { transform: rotate(-12deg) scale(1.12); }
-    80% { transform: rotate(12deg) scale(1.12); }
-}
-
-.wobble-1 {
-    animation: wobbleLight 0.55s ease-in-out;
-}
-
-.wobble-2 {
-    animation: wobbleHard 0.6s ease-in-out;
-}
-
-.tap-dots {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 16px;
-}
-
-.tap-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--blush-mid);
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.tap-dot.active {
-    background: var(--rosegold);
-    transform: scale(1.25);
-}
+        .tap-dot.active {
+            background: var(--rosegold);
+            transform: scale(1.25);
+        }
     </style>
 </head>
 <body>
     <!-- 3-Tap Gift Box Intro Overlay -->
-<div id="gift-gate">
-    <span class="badge">Special Delivery For Achu 📦</span>
-    <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text-main); max-width: 480px;">
-        A Mystery Box Arrived!
-    </h2>
-    <p id="gift-hint" style="color: var(--text-muted); font-size: 0.98rem; max-width: 380px; margin-top: 8px;">
-        Tap the gift box <strong>3 times</strong> to unwrap your birthday surprise...
-    </p>
+    <div id="gift-gate">
+        <span class="badge">A Birthday Note For Priyal 📦</span>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text-main); max-width: 480px;">
+            Something Small For Your Day
+        </h2>
+        <p id="gift-hint" style="color: var(--text-muted); font-size: 0.98rem; max-width: 380px; margin-top: 8px;">
+            Tap the gift box <strong>3 times</strong> to open...
+        </p>
 
-    <button type="button" id="gift-box" class="gift-box-btn" onclick="tapGiftBox()" aria-label="Tap gift box">
-        🎁
-    </button>
+        <button type="button" id="gift-box" class="gift-box-btn" onclick="tapGiftBox()" aria-label="Tap gift box">
+            🎁
+        </button>
 
-    <div class="tap-dots">
-        <span class="tap-dot" id="dot-1"></span>
-        <span class="tap-dot" id="dot-2"></span>
-        <span class="tap-dot" id="dot-3"></span>
+        <div class="tap-dots">
+            <span class="tap-dot" id="dot-1"></span>
+            <span class="tap-dot" id="dot-2"></span>
+            <span class="tap-dot" id="dot-3"></span>
+        </div>
     </div>
-</div>
 
     <!-- Floating Background Hearts Container -->
     <div id="hearts-container"></div>
 
     <!-- Navigation Bar -->
     <header>
-        <div class="nav-logo">🌸 For Achu (Snowbell / Idli / Limboo)</div>
+        <div class="nav-logo">🌸 For Priyal</div>
         <div class="nav-buttons">
             <button class="btn btn-secondary" onclick="toggleAudio()" id="music-btn">🎵 Play Music</button>
             <button class="btn" onclick="triggerConfetti()">✨ Celebrate</button>
@@ -808,48 +780,45 @@ html, body {
 
     <!-- Hero Section -->
     <section class="hero">
-        <span class="badge">Happy Birthday, Achu!</span>
-        <h1>To My Amazing Best Friend, <span>Achu</span></h1>
-        <p>From sharing silly secrets to standing rock-solid through every high and low—having you as my best friend (whether you're acting like <strong>Snowbell</strong>, <strong>Idli</strong>, or <strong>Limboo</strong>!) is the greatest gift.</p>
+        <span class="badge">Happy Birthday, Priyal!</span>
+        <h1>To Someone I Care For Deeply, <span>Priyal</span></h1>
+        <p>The bond we share as friends means a lot to me—and quietly, you have always held a very special place in my heart. I am genuinely grateful for you.</p>
         <div class="hero-actions">
-            <a href="#letter" class="btn">Open Your Letter 💌</a>
-            <a href="#gallery" class="btn btn-secondary">Photo Gallery 📸</a>
+            <a href="#letter" class="btn">Read Your Note 💌</a>
+            <a href="#gallery" class="btn btn-secondary">Shared Moments 📸</a>
         </div>
     </section>
 
     <!-- Letter Section -->
     <section id="letter">
         <div class="section-header">
-            <span>From My Heart</span>
-            <h2>A Special Note For You</h2>
+            <span>From Where I Stand</span>
+            <h2>An Honest Note For You</h2>
             <div class="divider"></div>
         </div>
 
         <div class="letter-card">
             <div class="letter-header">
-                <div class="crown-icon">👑</div>
+                <div class="crown-icon">🌸</div>
                 <div>
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem;">Dearest Achu / Snowbell / Idli / Limboo,</h3>
-                    <p style="font-size: 0.85rem; color: var(--rosegold);">Read with lots of smiles and warmth ✨</p>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem;">Dear Priyal</h3>
+                    <p style="font-size: 0.85rem; color: var(--rosegold);">Honest, gentle, and meant sincerely ✨</p>
                 </div>
             </div>
             
             <div class="letter-body">
                 <p>
-                    They say friends come and go in life, but someone as uniquely wonderful as you becomes a permanent part of your world. Whether you're being sweet like Snowbell, chill like Idli, sharp and fun like Limboo, or just shining brightly as Achu—you bring so much joy everywhere you go.
+                    I will never pretend my feelings for you have been ordinary—you have always held a special place close to my heart. At the same time, I value the real friendship we have and never want to make things heavy or put any weight on what you feel.
                 </p>
                 <p>
-                    Thank you for always being my safest space—the person I can vent to without filter, celebrate tiny victories with, and count on when things get crazy. You possess the kindest heart, the funniest laugh, and a vibe that brightens my day.
-                </p>
-                <p>
-                    On your birthday, I want to remind you how deeply valued you are. May this coming year bring you breathtaking adventures, boundless joy, and all your biggest dreams coming true. Remember, I've always got your back through thick and thin!
+                    On your birthday, my wish for you is pure and simple: festive warmth, genuine happiness, peace of mind, good health, and every good thing you hope for this year. No matter how life shifts, I will always wish you well and appreciate the bond we share.
                 </p>
             </div>
 
             <div class="letter-footer">
                 <div>
-                    <strong style="display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem;">Happy Birthday Again!</strong>
-                    <span style="font-size: 0.8rem; color: var(--text-muted);">With all my best wishes & cheers 🥂</span>
+                    <strong style="display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem;">Happy Birthday, Priyal!</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Wishing you warmth, joy, and peace always 🌸</span>
                 </div>
                 <button class="like-btn" onclick="likeLetter()">
                     <span id="like-icon">🤍</span> <span id="like-count">24</span>
@@ -861,8 +830,8 @@ html, body {
     <!-- Timeline Section -->
     <section id="memories">
         <div class="section-header">
-            <span>Milestone Moments</span>
-            <h2>Our Journey Together</h2>
+            <span>Our Bond</span>
+            <h2>The Good We’ve Shared</h2>
             <div class="divider"></div>
         </div>
 
@@ -870,36 +839,36 @@ html, body {
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="timeline-date">The Beginning</span>
-                    <h3>When We First Clicked</h3>
-                    <p>Who knew that a casual conversation would turn into such a great friendship? From day one, you've been one of a kind.</p>
+                    <span class="timeline-date">The Foundation</span>
+                    <h3>A Friendship That Felt Real</h3>
+                    <p>From the start, there was an easy comfort between us—the kind that made talking feel effortless.</p>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="timeline-date">Late Night Conversations</span>
-                    <h3>Endless Laughter & Confessions</h3>
-                    <p>Sharing deep secrets, roasting each other mercilessly, and laughing until our stomachs hurt. You always keep things interesting!</p>
+                    <span class="timeline-date">Quiet Care</span>
+                    <h3>Caring Beneath the Surface</h3>
+                    <p>Even when things stayed right where they belong in friendship, the care and fondness on my side have always stayed steady.</p>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="timeline-date">Through Thick & Thin</span>
-                    <h3>My Favorite Partner in Crime</h3>
-                    <p>Whenever life threw hurdles, we navigated them with resilience and humor. Having a best friend like you makes everything better.</p>
+                    <span class="timeline-date">Good Company</span>
+                    <h3>Laughter, Talks & Understanding</h3>
+                    <p>Sharing jokes, everyday thoughts, and real moments—having a good bond with someone you value is a gift of its own.</p>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <span class="timeline-date">Today & Always</span>
-                    <h3>Celebrating YOU Today 🎉</h3>
-                    <p>Here’s to another magnificent year of growth, joy, adventures, and being your awesome self. Happy Birthday, Achu!</p>
+                    <span class="timeline-date">Your Birthday</span>
+                    <h3>Celebrating You Today 🎉</h3>
+                    <p>Today is about your smiles, your journey, and the year ahead. Wishing you nothing but bright days, Priyal.</p>
                 </div>
             </div>
         </div>
@@ -908,9 +877,9 @@ html, body {
     <!-- Flip Cards Gallery Section -->
     <section>
         <div class="section-header">
-            <span>Interactive Cards</span>
-            <h2>Tap to Reveal Memories</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Hover or tap cards to flip them and uncover secret notes!</p>
+            <span>Little Thoughts</span>
+            <h2>Tap a Card to Flip</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Hover or tap a card to read a short note.</p>
             <div class="divider" style="margin-top: 15px;"></div>
         </div>
 
@@ -919,13 +888,13 @@ html, body {
             <div class="flip-card" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-front">
-                        <img src="image/1.jpg" alt="Memory" style="object-fit: cover;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main);">The Snowbell Vibe</h3>
+                        <img src="image/6.jpeg" alt="Memory" style="object-fit: cover;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main);"></h3>
                         <span style="font-size: 0.75rem; color: var(--rosegold); margin-top: 5px;">Tap to flip 💌</span>
                     </div>
                     <div class="flip-back">
-                        <h3>Graceful & Sweet</h3>
-                        <p>Calm, pretty, and bringing wonderful energy wherever you go—just like a true Snowbell!</p>
+                        <h3>Gentle & Kind</h3>
+                        <p>There is a soft, calm side to you that leaves a lasting impression long after a conversation ends.</p>
                     </div>
                 </div>
             </div>
@@ -934,13 +903,13 @@ html, body {
             <div class="flip-card" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-front">
-                        <img src="image/2.jpg" alt="Memory" style="object-fit: cover;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main);">Idli & Limboo Mode</h3>
+                        <img src="image/3.jpeg" alt="Memory" style="object-fit: cover;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main);"></h3>
                         <span style="font-size: 0.75rem; color: var(--rosegold); margin-top: 5px;">Tap to flip 💌</span>
                     </div>
                     <div class="flip-back">
-                        <h3>The Perfect Mix</h3>
-                        <p>Comforting and soft-hearted like Idli, but sharp, witty, and full of flavor like Limboo!</p>
+                        <h3>Familiar & Lively</h3>
+                        <p>There is a lively, easygoing energy in you that makes conversations feel light and enjoyable.</p>
                     </div>
                 </div>
             </div>
@@ -949,13 +918,13 @@ html, body {
             <div class="flip-card" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-front">
-                        <img src="image/3.jpg" alt="Memory" style="object-fit: cover;">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main);">Pure Achu Energy</h3>
+                        <img src="image/2.jpeg" alt="Memory" style="object-fit: cover;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main);"></h3>
                         <span style="font-size: 0.75rem; color: var(--rosegold); margin-top: 5px;">Tap to flip 💌</span>
                     </div>
                     <div class="flip-back">
-                        <h3>Main Character Vibe</h3>
-                        <p>Unstoppable, fun, and lighting up every single room you walk into. Never change!</p>
+                        <h3>Someone I Value</h3>
+                        <p>Even without everything matching up the way I once wished, your friendship and presence still mean a lot.</p>
                     </div>
                 </div>
             </div>
@@ -965,56 +934,82 @@ html, body {
     <!-- Photo Gallery Section -->
     <section id="gallery">
         <div class="section-header">
-            <span>Captured Moments</span>
-            <h2>Photo Gallery 📸</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Tap any photo to view it up close!</p>
+            <span>Photo Memories</span>
+            <h2>Snapshots We Keep 📸</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Tap any photo to view it closer.</p>
             <div class="divider" style="margin-top: 15px;"></div>
         </div>
 
         <div class="photo-gallery-grid">
-            <div class="gallery-item" onclick="openLightbox('image/4.jpg', 'Unforgettable Days', 'Always laughing about something random!')">
-                <img src="image/4.jpg" alt="Gallery Photo 1" style="object-fit: contain;">
+            <div class="gallery-item" onclick="openLightbox('image/7.jpeg', 'Garba Night Grace', 'Traditional vibes, festive lights, and that effortless smile ✨')">
+                <img src="image/7.jpeg" alt="Gallery Photo 1">
                 <div class="gallery-overlay">
-                    <h3>Unforgettable Days</h3>
-                    <p>Always laughing about something random!</p>
+                    <h3>Garba Night Grace</h3>
+                    <p>Traditional vibes, festive lights, and that effortless smile ✨</p>
                 </div>
             </div>
 
-            <div class="gallery-item" onclick="openLightbox('image/5.jpg', 'Good Food & Great Vibes', 'Idli & Limboo energy in action 🍲🍋')">
-                <img src="image/5.jpg" alt="Gallery Photo 2">
+            <div class="gallery-item" onclick="openLightbox('image/9.jpeg', 'Festive Sparkle', 'Under the fairy lights, looking right in your element 🌸')">
+                <img src="image/9.jpeg" alt="Gallery Photo 2">
                 <div class="gallery-overlay">
-                    <h3>Good Food & Great Vibes</h3>
-                    <p>Idli & Limboo energy in action 🍲🍋</p>
+                    <h3>Festive Sparkle</h3>
+                    <p>Under the fairy lights, looking right in your element 🌸</p>
                 </div>
             </div>
 
-            <div class="gallery-item" onclick="openLightbox('image/6.jpg', 'Candid Smiles', 'One of my favorite snapshots of you ✨')">
-                <img src="image/6.jpg" alt="Gallery Photo 3">
+            <div class="gallery-item" onclick="openLightbox('image/10.jpeg', 'Colors of Celebration', 'Bright Navratri colors and a smile that steals the frame 🎉')">
+                <img src="image/10.jpeg" alt="Gallery Photo 3">
                 <div class="gallery-overlay">
-                    <h3>Candid Smiles</h3>
-                    <p>One of my favorite snapshots of you ✨</p>
+                    <h3>Colors of Celebration</h3>
+                    <p>Bright Navratri colors and a smile that steals the frame 🎉</p>
                 </div>
             </div>
 
-            <div class="gallery-item" onclick="openLightbox('image/7.jpg', 'Always Iconic', 'Snowbell & Achu capturing the best moments 🌸')">
-                <img src="image/7.jpg" alt="Gallery Photo 4">
+            <div class="gallery-item" onclick="openLightbox('image/11.jpeg', 'Golden & Royal', 'Yellow, purple, and pure festive energy all in one frame 🌟')">
+                <img src="image/11.jpeg" alt="Gallery Photo 4">
                 <div class="gallery-overlay">
-                    <h3>Always Iconic</h3>
-                    <p>Snowbell & Achu capturing the best moments 🌸</p>
+                    <h3>Golden & Royal</h3>
+                    <p>Yellow, purple, and pure festive energy all in one frame 🌟</p>
                 </div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('image/8.jpg', 'Adventures Together', 'From silly to serious, we’ve done it all!')">
-                <img src="image/8.jpg" alt="Gallery Photo 5">
+
+            <div class="gallery-item" onclick="openLightbox('image/14.jpeg', 'Late-Night Sip & Smile', 'A cold drink, warm lights, and that playful wink 😉✨')">
+                <img src="image/14.jpeg" alt="Gallery Photo 5">
                 <div class="gallery-overlay">
-                    <h3>Adventures Together</h3>
-                    <p>From silly to serious, we’ve done it all!</p>
+                    <h3>Late-Night Sip & Smile</h3>
+                    <p>A cold drink, warm lights, and that playful wink 😉✨</p>
                 </div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('image/9.jpg', 'Pure Joy', 'Your laughter is contagious and unforgettable!')">
-                <img src="image/10.jpg" alt="Gallery Photo 6">
+
+            <div class="gallery-item" onclick="openLightbox('image/17.jpeg', 'Soft & Serene', 'Surrounded by yellow blooms, calm and graceful as ever 🌼')">
+                <img src="image/17.jpeg" alt="Gallery Photo 6">
                 <div class="gallery-overlay">
-                    <h3>Pure Joy</h3>
-                    <p>Your laughter is contagious and unforgettable!</p>
+                    <h3>Soft & Serene</h3>
+                    <p>Surrounded by yellow blooms, calm and graceful as ever 🌼</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('image/18.jpeg', 'Candid Hangouts', 'Unfiltered laughs and easy evening conversations 😄')">
+                <img src="image/18.jpeg" alt="Gallery Photo 7">
+                <div class="gallery-overlay">
+                    <h3>Candid Hangouts</h3>
+                    <p>Unfiltered laughs and easy evening conversations 😄</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('image/19.jpeg', 'Pure Goofy Mode', 'Only you can pull off this look and still make everyone laugh 😂')">
+                <img src="image/19.jpeg" alt="Gallery Photo 8">
+                <div class="gallery-overlay">
+                    <h3>Pure Goofy Mode</h3>
+                    <p>Only you can pull off this look and still make everyone laugh 😂</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('image/8.jpeg', 'Effortless Charm', 'Simple, poised, and always carrying the best energy 🤍')">
+                <img src="image/8.jpeg" alt="Gallery Photo 9">
+                <div class="gallery-overlay">
+                    <h3>Effortless Charm</h3>
+                    <p>Simple, poised, and always carrying the best energy 🤍</p>
                 </div>
             </div>
         </div>
@@ -1035,19 +1030,19 @@ html, body {
     <!-- Cake Cutting Section -->
     <section>
         <div class="cake-section">
-            <span style="color: var(--rosegold); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Make A Wish</span>
+            <span style="color: var(--rosegold); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">A Birthday Wish</span>
             <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-top: 10px;">Blow Out the Birthday Candles!</h2>
             <div class="cake-emoji" id="cake-element" onclick="blowCandles()" title="Click to blow candles!">🎂🔥</div>
-            <p id="cake-status">Tap the cake to blow out the candles and trigger confetti!</p>
+            <p id="cake-status">Tap the cake to make a birthday wish for yourself!</p>
             <button class="btn" onclick="blowCandles()">Make a Wish Now!</button>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <h3>Happy Birthday, Achu / Snowbell / Idli / Limboo! 🎉</h3>
-        <p>Created with infinite warmth, care, and good vibes.</p>
-        <p style="font-size: 0.8rem; color: #aaa; margin-top: 20px;">&copy; 2026 Crafted specially for the best friend in the universe.</p>
+        <h3>Happy Birthday, Priyal 🎉</h3>
+        <p>Grateful for our bond, and always wishing you the best.</p>
+        <p style="font-size: 0.8rem; color: #aaa; margin-top: 20px;">&copy; 2026 Crafted specially for Priyal.</p>
     </footer>
     
     <!-- Toast Notification Box -->
@@ -1057,44 +1052,43 @@ html, body {
     <script>
         let giftTaps = 0;
 
-function tapGiftBox() {
-    const box = document.getElementById('gift-box');
-    const hint = document.getElementById('gift-hint');
-    const gate = document.getElementById('gift-gate');
+        function tapGiftBox() {
+            const box = document.getElementById('gift-box');
+            const hint = document.getElementById('gift-hint');
+            const gate = document.getElementById('gift-gate');
 
-    giftTaps++;
+            giftTaps++;
 
-    // Reset animation class so it retriggers cleanly on each tap
-    box.classList.remove('wobble-1', 'wobble-2');
-    void box.offsetWidth;
+            box.classList.remove('wobble-1', 'wobble-2');
+            void box.offsetWidth;
 
-    if (giftTaps === 1) {
-        document.getElementById('dot-1').classList.add('active');
-        box.classList.add('wobble-1');
-        hint.innerHTML = "Ooh, something's rattling inside! Is it <strong>Idli</strong> or <strong>Limboo</strong>? Tap again! 👀";
-    } else if (giftTaps === 2) {
-        document.getElementById('dot-2').classList.add('active');
-        box.classList.add('wobble-2');
-        hint.innerHTML = "Almost open! <strong>Snowbell</strong> energy detected... <strong>1 more tap!</strong> ✨";
-    } else if (giftTaps >= 3) {
-        document.getElementById('dot-3').classList.add('active');
-        box.innerText = "🎊";
-        box.style.transform = "scale(1.35)";
-        hint.innerHTML = "<strong>Happy Birthday, Achu!! 🎉</strong>";
+            if (giftTaps === 1) {
+                document.getElementById('dot-1').classList.add('active');
+                box.classList.add('wobble-1');
+                hint.innerHTML = "Something's inside—maybe <strong>festive cheer</strong> or <strong>good memories</strong>? Tap again! 👀";
+            } else if (giftTaps === 2) {
+                document.getElementById('dot-2').classList.add('active');
+                box.classList.add('wobble-2');
+                hint.innerHTML = "Almost open! A touch of <strong>Priyal</strong> warmth... <strong>1 more tap!</strong> ✨";
+            } else if (giftTaps >= 3) {
+                document.getElementById('dot-3').classList.add('active');
+                box.innerText = "🎊";
+                box.style.transform = "scale(1.35)";
+                hint.innerHTML = "<strong>Happy Birthday, Priyal!! 🎉</strong>";
 
-        // Burst confetti & reveal the main site
-        if (typeof triggerConfetti === 'function') {
-            triggerConfetti();
+                if (typeof triggerConfetti === 'function') {
+                    triggerConfetti();
+                }
+
+                setTimeout(() => {
+                    gate.classList.add('opened');
+                    setTimeout(() => {
+                        gate.remove();
+                    }, 600);
+                }, 450);
+            }
         }
 
-        setTimeout(() => {
-            gate.classList.add('opened');
-            setTimeout(() => {
-                gate.remove();
-            }, 600);
-        }, 450);
-    }
-}
         // Lightbox Gallery Logic
         function openLightbox(src, title, desc) {
             document.getElementById('lightbox-img').src = src;
@@ -1135,81 +1129,78 @@ function tapGiftBox() {
 
         // Confetti burst effect
         function triggerConfetti(options = {}) {
-    const showModal = options.showModal !== false;
+            const showModal = options.showModal !== false;
 
-    if (showModal) {
-        const modal = document.getElementById('celebration-modal');
-        if (modal) {
-            modal.classList.add('active');
-            if (typeof renderCelebrationWish === 'function') {
-                renderCelebrationWish();
+            if (showModal) {
+                const modal = document.getElementById('celebration-modal');
+                if (modal) {
+                    modal.classList.add('active');
+                    if (typeof renderCelebrationWish === 'function') {
+                        renderCelebrationWish();
+                    }
+                }
+            }
+
+            const emojis = ['🎉', '🌸', '✨', '💖', '🎂', '🍋', '🍲'];
+            const colors = ['#b76e79', '#cd8389', '#f4c2c2', '#eacace', '#ffd1dc', '#f7b267'];
+            const maxWidth = document.documentElement.clientWidth || window.innerWidth;
+
+            const totalPieces = 120;
+            const waves = 4;
+            const perWave = Math.ceil(totalPieces / waves);
+
+            for (let w = 0; w < waves; w++) {
+                setTimeout(() => {
+                    for (let i = 0; i < perWave; i++) {
+                        setTimeout(() => {
+                            const piece = document.createElement('div');
+                            const roll = Math.random();
+                            const fallDuration = (Math.random() * 1.6 + 1.4).toFixed(2);
+                            const startX = Math.min(maxWidth - 28, Math.max(4, Math.random() * (maxWidth - 28)));
+
+                            piece.style.position = 'fixed';
+                            piece.style.zIndex = '9999';
+                            piece.style.pointerEvents = 'none';
+                            piece.style.left = startX + 'px';
+                            piece.style.top = '-28px';
+                            piece.style.opacity = '0.95';
+                            piece.style.transition = `transform ${fallDuration}s cubic-bezier(0.22, 0.61, 0.36, 1), opacity ${fallDuration}s ease-in`;
+
+                            if (roll < 0.32) {
+                                piece.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                                piece.style.fontSize = (Math.floor(Math.random() * 12) + 16) + 'px';
+                            } else if (roll < 0.68) {
+                                piece.style.width = (Math.floor(Math.random() * 6) + 6) + 'px';
+                                piece.style.height = (Math.floor(Math.random() * 10) + 10) + 'px';
+                                piece.style.borderRadius = '2px';
+                                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                            } else {
+                                const size = Math.floor(Math.random() * 8) + 6;
+                                piece.style.width = size + 'px';
+                                piece.style.height = size + 'px';
+                                piece.style.borderRadius = '50%';
+                                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                            }
+
+                            document.body.appendChild(piece);
+
+                            requestAnimationFrame(() => {
+                                setTimeout(() => {
+                                    const driftX = (Math.random() * 140 - 70);
+                                    const rotateDeg = (Math.random() * 540 - 270);
+                                    piece.style.transform = `translate(${driftX}px, ${window.innerHeight + 80}px) rotate(${rotateDeg}deg)`;
+                                    piece.style.opacity = '0';
+                                }, 30);
+                            });
+
+                            setTimeout(() => {
+                                piece.remove();
+                            }, (parseFloat(fallDuration) + 0.2) * 1000);
+                        }, i * 18);
+                    }
+                }, w * 260);
             }
         }
-    }
-
-    const emojis = ['🎉', '🌸', '✨', '💖', '🎂', '🍋', '🍲'];
-    const colors = ['#b76e79', '#cd8389', '#f4c2c2', '#eacace', '#ffd1dc', '#f7b267'];
-    const maxWidth = document.documentElement.clientWidth || window.innerWidth;
-
-    const totalPieces = 120; // Increase or decrease for denser/lighter shower
-    const waves = 4;
-    const perWave = Math.ceil(totalPieces / waves);
-
-    for (let w = 0; w < waves; w++) {
-        setTimeout(() => {
-            for (let i = 0; i < perWave; i++) {
-                setTimeout(() => {
-                    const piece = document.createElement('div');
-                    const roll = Math.random();
-                    const fallDuration = (Math.random() * 1.6 + 1.4).toFixed(2);
-                    const startX = Math.min(maxWidth - 28, Math.max(4, Math.random() * (maxWidth - 28)));
-
-                    piece.style.position = 'fixed';
-                    piece.style.zIndex = '9999';
-                    piece.style.pointerEvents = 'none';
-                    piece.style.left = startX + 'px';
-                    piece.style.top = '-28px';
-                    piece.style.opacity = '0.95';
-                    piece.style.transition = `transform ${fallDuration}s cubic-bezier(0.22, 0.61, 0.36, 1), opacity ${fallDuration}s ease-in`;
-
-                    if (roll < 0.32) {
-                        // Falling birthday emoji
-                        piece.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                        piece.style.fontSize = (Math.floor(Math.random() * 12) + 16) + 'px';
-                    } else if (roll < 0.68) {
-                        // Confetti strip
-                        piece.style.width = (Math.floor(Math.random() * 6) + 6) + 'px';
-                        piece.style.height = (Math.floor(Math.random() * 10) + 10) + 'px';
-                        piece.style.borderRadius = '2px';
-                        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    } else {
-                        // Confetti dot
-                        const size = Math.floor(Math.random() * 8) + 6;
-                        piece.style.width = size + 'px';
-                        piece.style.height = size + 'px';
-                        piece.style.borderRadius = '50%';
-                        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    }
-
-                    document.body.appendChild(piece);
-
-                    requestAnimationFrame(() => {
-                        setTimeout(() => {
-                            const driftX = (Math.random() * 140 - 70);
-                            const rotateDeg = (Math.random() * 540 - 270);
-                            piece.style.transform = `translate(${driftX}px, ${window.innerHeight + 80}px) rotate(${rotateDeg}deg)`;
-                            piece.style.opacity = '0';
-                        }, 30);
-                    });
-
-                    setTimeout(() => {
-                        piece.remove();
-                    }, (parseFloat(fallDuration) + 0.2) * 1000);
-                }, i * 18);
-            }
-        }, w * 260);
-    }
-}   
 
         // Letter Like Counter Logic
         let isLiked = false;
@@ -1223,7 +1214,7 @@ function tapGiftBox() {
                 countSpan.innerText = count;
                 iconSpan.innerText = '💖';
                 isLiked = true;
-                showToast("💖 Thanks for sending love back!");
+                showToast("💖 Appreciated!");
                 triggerConfetti();
             } else {
                 count--;
@@ -1241,41 +1232,41 @@ function tapGiftBox() {
 
             if (!candlesBlown) {
                 cakeElement.innerText = '🎂✨';
-                cakeStatus.innerText = '🎉 Yay! Candles blown out! May all your heartfelt wishes come true!';
+                cakeStatus.innerText = '🎉 Wish made! Hoping this year brings you everything good!';
                 candlesBlown = true;
                 triggerConfetti();
             } else {
                 cakeElement.innerText = '🎂🔥';
-                cakeStatus.innerText = 'Tap the cake to blow out the candles again!';
+                cakeStatus.innerText = 'Tap the cake to make another wish!';
                 candlesBlown = false;
             }
         }
 
         // Hindi Birthday Song Audio Player
-const birthdayAudio = new Audio('audio/atrangi-yaari.m4a');
-birthdayAudio.loop = true; // Loops smoothly during the celebration
-let isPlaying = false;
+        const birthdayAudio = new Audio('audio/atrangi-yaari.m4a');
+        birthdayAudio.loop = true;
+        let isPlaying = false;
 
-function toggleAudio() {
-    const btn = document.getElementById('music-btn');
+        function toggleAudio() {
+            const btn = document.getElementById('music-btn');
 
-    if (!isPlaying) {
-        birthdayAudio.play()
-            .then(() => {
-                isPlaying = true;
-                btn.innerText = "🔇 Pause Music";
-                showToast("🎵 Playing Hindi Birthday Song...");
-            })
-            .catch(() => {
-                showToast("Tap again or check the audio file path.");
-            });
-    } else {
-        birthdayAudio.pause();
-        isPlaying = false;
-        btn.innerText = "🎵 Play Music";
-        showToast("🔇 Music paused.");
-    }
-}   
+            if (!isPlaying) {
+                birthdayAudio.play()
+                    .then(() => {
+                        isPlaying = true;
+                        btn.innerText = "🔇 Pause Music";
+                        showToast("🎵 Playing birthday music...");
+                    })
+                    .catch(() => {
+                        showToast("Tap again or check the audio file path.");
+                    });
+            } else {
+                birthdayAudio.pause();
+                isPlaying = false;
+                btn.innerText = "🎵 Play Music";
+                showToast("🔇 Music paused.");
+            }
+        }
 
         // Toast Notification Helper
         function showToast(message) {
